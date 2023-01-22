@@ -18,7 +18,8 @@ h2{
   margin-top: 50px;
   margin-bottom: 25px;
   padding-left: 30px;
-  text-align: left;
+  
+  -align: left;
   font-family: 'BatmanForeverAlternate';
 }
 
@@ -129,6 +130,9 @@ span {
 .row-2{
   width: 100%;
 }
+/* .row-2 .emailTab TextField{
+  width:100%;
+} */
 /* @media screen and (min-width: 860px) {
   .register .col-2 img {
     display: initial;
@@ -281,6 +285,9 @@ span {
     flex-direction: column;
     width: 93%;
   }
+  /* .row-2 .emailTab{
+    width:10%
+  } */
 
   .privacypolicy {
     width: 107%;
