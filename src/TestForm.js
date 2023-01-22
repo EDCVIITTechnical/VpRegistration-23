@@ -18,6 +18,7 @@ export default function Form() {
   //   "Vp-Coming-Soon/src/assets/vp-logo.png";
 
   const [paymentSucceded, setPaymentSucceded] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   //   payment Methods
   function loadScript(src) {
@@ -34,62 +35,65 @@ export default function Form() {
     });
   }
 
-  async function displayRazorpay() {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
+  // async function displayRazorpay() {
+  //   const res = await loadScript(
+  //     "https://checkout.razorpay.com/v1/checkout.js"
+  //   );
 
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
+  //   if (!res) {
+  //     alert("Razorpay SDK failed to load. Are you online?");
+  //     return;
+  //   }
 
-    const result = await axios.post(
-      "https://registration-back-k5iw.onrender.com/api/v1/payment/orders"
-    );
+  //   const result = await axios.post(
+  //     "https://registration-back-k5iw.onrender.com/api/v1/payment/orders"
+  //   );
 
-    if (!result) {
-      alert("Server error. Are you online?");
-      return;
-    }
+  //   if (!result) {
+  //     alert("Server error. Are you online?");
+  //     return;
+  //   }
 
-    const { amount, id: order_id, currency } = result.data;
+  //   const { amount, id: order_id, currency } = result.data;
 
-    const options = {
-      key: "rzp_test_V1g5UswCDJjeD1", // Enter the Key ID generated from the Dashboard
-      amount: amount.toString(),
-      currency: currency,
-      name: "Vishwapreneur ",
-      description: "Entry Fee ₹300 + ₹6.30 Convenience Charges",
-      order_id: order_id,
-      handler: async function (response) {
-        const data = {
-          orderCreationId: order_id,
-          razorpayPaymentId: response.razorpay_payment_id,
-          razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
+  //   const options = {
+  //     key: "rzp_test_V1g5UswCDJjeD1", // Enter the Key ID generated from the Dashboard
+  //     amount: amount.toString(),
+  //     currency: currency,
+  //     name: "Vishwapreneur ",
+  //     description: "Entry Fee ₹300 + ₹6.30 Convenience Charges",
+  //     order_id: order_id,
+  //     handler: async function (response) {
+  //       const data = {
+  //         orderCreationId: order_id,
+  //         razorpayPaymentId: response.razorpay_payment_id,
+  //         razorpayOrderId: response.razorpay_order_id,
+  //         razorpaySignature: response.razorpay_signature,
+  //       };
 
-        const result = await axios.post(
-          "https://registration-back-k5iw.onrender.com/api/v1/payment/success",
-          data
-        );
+  //       const result = await axios.post(
+  //         "https://registration-back-k5iw.onrender.com/api/v1/payment/success",
+  //         data
+  //       );
 
-        alert(result.data.msg);
-        setPaymentSucceded(true);
-      },
-      notes: {
-        address: "Example Corporate Office",
-      },
-      theme: {
-        color: "#1A0F5B",
-      },
-    };
+  //       alert(result.data.msg);
+  //       setPaymentSucceded(true);
+  //     },
+  //     notes: {
+  //       address: "Example Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#1A0F5B",
+  //     },
+  //   };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  }
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // }
 
+  const registrationSuccess = async () => {
+    setRegistered(true);
+  };
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -115,9 +119,13 @@ export default function Form() {
       .then(navigate("/success", { replace: true }));
   };
 
-  if (paymentSucceded) {
+  // if (paymentSucceded) {
+  //   submitNew();
+  // }
+  if (registered) {
     submitNew();
   }
+
   const resetAll = () => {
     setFirstName("");
     setLastName("");
@@ -220,11 +228,11 @@ export default function Form() {
                   autoCapitalize="ON"
                   autoComplete="OFF"
                   id="outlined-basic"
-                  label="Email"
-                  name="email"
-                  value={email}
+                  label="Phone Number"
+                  name="phoneNumber"
+                  value={phoneNumber}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setPhoneNumber(e.target.value);
                   }}
                   variant="filled"
                   multiline
@@ -241,17 +249,18 @@ export default function Form() {
                   autoCapitalize="ON"
                   autoComplete="OFF"
                   id="outlined-basic"
-                  label="Phone Number"
-                  name="phoneNumber"
-                  value={phoneNumber}
+                  label="Email"
+                  name="email"
+                  value={email}
                   onChange={(e) => {
-                    setPhoneNumber(e.target.value);
+                    setEmail(e.target.value);
                   }}
                   variant="filled"
                   multiline
                   inputProps={{ style: { color: "#ffab0f" } }}
                   color="warning"
                 />
+
                 <span></span>
                 <br></br>
 
@@ -327,14 +336,23 @@ export default function Form() {
                   <Button onClick={displayRazorpay}>Proceed to payment</Button>
                 )} */}
             </form>
+            <div className="buttons">
+              <div className="reset1">
+                <Button onClick={resetAll}>Reset All</Button>
+                {/* <div>< input type="reset" value="Reset All"/></div> */}
+              </div>
+              <div className="submit">
+                <Button onClick={registrationSuccess}>Regsiter Now!</Button>
+              </div>
+            </div>
             <div className="privacypolicy">
               <p>
                 <Checkbox /> I Agree to{" "}
-                <a href="https://vishwapreneur.in/privacypolicy">
+                <a href="https://register.vishwapreneur.in/privacypolicy">
                   Privacy Policy
                 </a>{" "}
                 and{" "}
-                <a href="https://vishwapreneur.in/termsAndConditions">
+                <a href="https://register.vishwapreneur.in/termsAndConditions">
                   {" "}
                   Terms and Conditions
                 </a>{" "}
@@ -350,15 +368,6 @@ export default function Form() {
               <p id="phone">
                 <a href="telto:9923411116">+919923411116</a>
               </p>
-            </div>
-            <div className="buttons">
-              <div className="reset1">
-                <Button onClick={resetAll}>Reset All</Button>
-                {/* <div>< input type="reset" value="Reset All"/></div> */}
-              </div>
-              <div className="submit">
-                <Button onClick={displayRazorpay}>proceed to payment</Button>
-              </div>
             </div>
           </div>
         </div>
