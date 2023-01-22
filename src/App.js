@@ -19,7 +19,7 @@ function App() {
         <Route path="registerforvp" element={<TestForm />} />
         <Route path="/termsAndConditions" element={<TermsAndConditions />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-//         <Route path="/closed" element={<RegClosed />} />
+         //<Route path="/closed" element={<RegClosed />} />
         <Route path="/" element={<TestForm />} />
       </Routes>
     </div>
