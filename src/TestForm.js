@@ -11,29 +11,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import font
 import "./assets/fonts/batmfa__.ttf";
-import { alpha, styled } from "@mui/material/styles";
+// import { alpha, styled } from "@mui/material/styles";
 import logo from "./assets/vp-LOGO 1.png";
 export default function Form() {
   // const bgImg =
   //   "Vp-Coming-Soon/src/assets/vp-logo.png";
 
-  const [paymentSucceded, setPaymentSucceded] = useState(false);
+//   const [paymentSucceded, setPaymentSucceded] = useState(false);
   const [registered, setRegistered] = useState(false);
 
   //   payment Methods
-  function loadScript(src) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
+//   function loadScript(src) {
+//     return new Promise((resolve) => {
+//       const script = document.createElement("script");
+//       script.src = src;
+//       script.onload = () => {
+//         resolve(true);
+//       };
+//       script.onerror = () => {
+//         resolve(false);
+//       };
+//       document.body.appendChild(script);
+//     });
+//   }
 
   // async function displayRazorpay() {
   //   const res = await loadScript(
