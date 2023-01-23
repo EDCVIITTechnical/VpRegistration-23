@@ -315,6 +315,8 @@ span {
   .buttons {
     margin-top: 2rem;
     padding-left: 20%;
+    position:relative;
+    right:10%;
     align-items: center;
     flex-direction: column-reverse;
   }
