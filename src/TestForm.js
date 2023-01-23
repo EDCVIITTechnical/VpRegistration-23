@@ -327,16 +327,13 @@ export default function Form() {
                   color="warning"
                 />
               </div>
-              {/* {firstName &&
+              {{firstName &&
                 lastName &&
                 city &&
                 college &&
                 phoneNumber &&
                 email && (
-                  <Button onClick={displayRazorpay}>Proceed to payment</Button>
-                )} */}
-            </form>
-            <div className="buttons">
+                <div className="buttons">
               <div className="reset1">
                 <Button onClick={resetAll}>Reset All</Button>
                 {/* <div>< input type="reset" value="Reset All"/></div> */}
@@ -345,6 +342,8 @@ export default function Form() {
                 <Button onClick={registrationSuccess}>Regsiter Now!</Button>
               </div>
             </div>
+                )}}
+            </form>
             <div className="privacypolicy">
               <p>
                 <Checkbox /> I Agree to{" "}
