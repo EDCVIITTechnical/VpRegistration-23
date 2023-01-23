@@ -353,18 +353,6 @@ export default function Form() {
                 )}
             </form>
             <div className="privacypolicy">
-              <p>
-                <Checkbox /> I Agree to{" "}
-                <a href="https://register.vishwapreneur.in/privacypolicy">
-                  Privacy Policy
-                </a>{" "}
-                and{" "}
-                <a href="https://register.vishwapreneur.in/termsAndConditions">
-                  {" "}
-                  Terms and Conditions
-                </a>{" "}
-                of Vishwapreneur
-              </p>
               <p id="contactUs"> Need Any Assistance? </p>
               <p id="mail">
                 Contact Us:{" "}
