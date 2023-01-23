@@ -373,7 +373,7 @@ export default function Form() {
                 </a>
               </p>
               <p id="phone">
-                <a href="telto:9923411116">+919923411116</a>
+                <a href="tel:9923411116">+919923411116</a>
               </p>
             </div>
           </div>
