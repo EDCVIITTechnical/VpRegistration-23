@@ -327,22 +327,24 @@ export default function Form() {
                   color="warning"
                 />
               </div>
-              {{firstName &&
+              {firstName &&
                 lastName &&
                 city &&
                 college &&
                 phoneNumber &&
                 email && (
-                <div className="buttons">
-              <div className="reset1">
-                <Button onClick={resetAll}>Reset All</Button>
-                {/* <div>< input type="reset" value="Reset All"/></div> */}
-              </div>
-              <div className="submit">
-                <Button onClick={registrationSuccess}>Regsiter Now!</Button>
-              </div>
-            </div>
-                )}}
+                  <div className="buttons">
+                    <div className="reset1">
+                      <Button onClick={resetAll}>Reset All</Button>
+                      {/* <div>< input type="reset" value="Reset All"/></div> */}
+                    </div>
+                    <div className="submit">
+                      <Button onClick={registrationSuccess}>
+                        Regsiter Now!
+                      </Button>
+                    </div>
+                  </div>
+                )}
             </form>
             <div className="privacypolicy">
               <p>
