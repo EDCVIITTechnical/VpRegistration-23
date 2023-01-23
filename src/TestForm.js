@@ -175,6 +175,7 @@ export default function Form() {
             <form id="form" className="flex flex-col">
               <div className="row-1">
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   // className='pd-r'
 
@@ -199,6 +200,7 @@ export default function Form() {
                 <span></span>
                 <br></br>
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   autoCapitalize="ON"
                   autoComplete="OFF"
@@ -221,6 +223,7 @@ export default function Form() {
 
                 <span></span>
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   InputLabelProps={{
                     style: { color: "white" },
@@ -242,6 +245,7 @@ export default function Form() {
               </div>
               <div className="row-2">
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   InputLabelProps={{
                     style: { color: "white" },
@@ -286,6 +290,7 @@ export default function Form() {
               </div>
               <div className="row-3">
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   InputLabelProps={{
                     style: { color: "white" },
@@ -308,6 +313,7 @@ export default function Form() {
                 <br></br>
 
                 <TextField
+                  required
                   sx={{ border: "outset #ffab0f 1px" }}
                   InputLabelProps={{
                     style: { color: "white" },
