@@ -30,9 +30,9 @@ function PaymentSuccess() {
           <div className="SuccessText2 h2">Successfully Registered for</div>
           <div className="VishwapreneurName2 h2"> Vishwapreneur'23</div>
         </div>
-        <div className="InfoContainer2">
-          <h5>You'll Receive a Mail Containing<br></br>All instructions<br></br>Check the Spam/Junk/Promotion<br></br>folder for the registration Email</h5>
-        </div>
+//         <div className="InfoContainer2">
+//           <h5>You'll Receive a Mail Containing<br></br>All instructions<br></br>Check the Spam/Junk/Promotion<br></br>folder for the registration Email</h5>
+//         </div>
       </div>
       <div className="mainContainer">
         <div className="boxContainer">
