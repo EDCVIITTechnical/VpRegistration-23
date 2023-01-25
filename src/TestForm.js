@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import "./TestForm.css";
 // backend req handler
-import axios from "axios";
+// import axios from "axios";
 // router
 import { useNavigate } from "react-router-dom";
 // import font
@@ -18,7 +18,12 @@ export default function Form() {
   //   "Vp-Coming-Soon/src/assets/vp-logo.png";
 
 //   const [paymentSucceded, setPaymentSucceded] = useState(false);
-  const [registered, setRegistered] = useState(false);
+  // const [registered, setRegistered] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   //   payment Methods
 //   function loadScript(src) {
@@ -91,9 +96,6 @@ export default function Form() {
   //   paymentObject.open();
   // }
 
-  const registrationSuccess = async () => {
-    setRegistered(true);
-  };
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -103,6 +105,12 @@ export default function Form() {
   const [code, setCode] = useState("");
   const baseURL =
     "https://registration-back-k5iw.onrender.com/api/v1/registerEvent";
+
+    //------------------------------------------------------------
+    /*
+  const registrationSuccess = async () => {
+    
+
 
   const participant = {
     firstName: firstName,
@@ -116,15 +124,46 @@ export default function Form() {
   const submitNew = async () => {
     await axios
       .post(baseURL, participant)
-      .then(navigate("/success", { replace: true }));
+      .then(setRegistered(true));
   };
-
+};
+// navigate("/success", { replace: true })
   // if (paymentSucceded) {
   //   submitNew();
   // }
   if (registered) {
-    submitNew();
+    // submitNew();
+    navigate("/success", { replace: true })
   }
+  */
+//------------------------------------------------------------------
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const response = await fetch(baseURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({firstName, lastName, phoneNumber,
+        email, code, college, city}),
+    });
+    if (response.status === 200) {
+      navigate('/success');
+    } else {
+      setError(await response.text());
+    }
+    setLoading(false);
+    // console.log(await response.text());
+  } catch (error) {
+    setError(error.message);
+    console.error(error);
+  }
+  setLoading(false);
+};
+
 
   const resetAll = () => {
     setFirstName("");
@@ -160,6 +199,12 @@ export default function Form() {
   // });
   return (
     <>
+    {loading ? (
+        <div className="loader-container">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+      
       <section className="MainContainer">
         <div className="register">
           <div className="col-2">
@@ -172,7 +217,7 @@ export default function Form() {
             <h2>Registration Form</h2>
             {/* <span>Experience an eSummit like Never before</span> */}
 
-            <form id="form" className="flex flex-col">
+            <form id="form" className="flex flex-col" onSubmit={handleSubmit}>
               <div className="row-1">
                 <TextField
                   required
@@ -345,7 +390,7 @@ export default function Form() {
                       {/* <div>< input type="reset" value="Reset All"/></div> */}
                     </div>
                     <div className="submit">
-                      <Button onClick={registrationSuccess}>
+                      <Button type = "submit">
                         Regsiter Now!
                       </Button>
                     </div>
@@ -367,6 +412,11 @@ export default function Form() {
           </div>
         </div>
       </section>
+      )}
+  {error && (
+   navigate('/error')
+  )}
+
     </>
   );
 }

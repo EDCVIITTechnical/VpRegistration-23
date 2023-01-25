@@ -23,7 +23,7 @@ function PaymentSuccess() {
         <div className="boxContainer2">
           <div className="rocket2">
             <img
-              src="https://res.cloudinary.com/da5mmxnn3/image/upload/v1674400522/vishwapreneur%2723/107653-trophy_pt83jw.gif"
+              src="https://res.cloudinary.com/da5mmxnn3/image/upload/v1674642431/Vishwapreneur/45722-rocket-loader_ovlgbf.gif "
               alt="success!"
             ></img>
           </div>
@@ -35,7 +35,7 @@ function PaymentSuccess() {
         <div className="boxContainer">
           <div className="rocket">
             <img
-              src="https://res.cloudinary.com/da5mmxnn3/image/upload/v1674400522/vishwapreneur%2723/107653-trophy_pt83jw.gif"
+              src="https://res.cloudinary.com/da5mmxnn3/image/upload/v1674642431/Vishwapreneur/45722-rocket-loader_ovlgbf.gif "
               alt="success!"
             ></img>
           </div>

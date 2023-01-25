@@ -8,12 +8,14 @@ import TestForm from "./TestForm";
 // import CampusAmbForm from "./CampusAmbForm";
 import TermsAndConditions from "./TermsAndConditions";
 import PrivacyPolicy from "./PrivacyPolicy";
+import Error from "./Error";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/success" element={<PaymentSuccess />} />
+        <Route path="/error" element={<Error />} />
         {/* <Route path="/registerasamb" element={<CampusAmbForm />} /> */}
         <Route path="registerforvp" element={<TestForm />} />
         <Route path="/termsAndConditions" element={<TermsAndConditions />} />
