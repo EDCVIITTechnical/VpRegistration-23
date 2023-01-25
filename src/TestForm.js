@@ -22,6 +22,9 @@ export default function Form() {
 
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+
+
   //   payment Methods
 //   function loadScript(src) {
 //     return new Promise((resolve) => {
@@ -137,6 +140,7 @@ export default function Form() {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setLoading(true);
   try {
     const response = await fetch(baseURL, {
       method: 'POST',
@@ -151,6 +155,7 @@ const handleSubmit = async (e) => {
     } else {
       console.error(await response.text());
     }
+    setLoading(false);
     // console.log(await response.text());
     console.log("success");
   } catch (error) {
@@ -193,6 +198,12 @@ const handleSubmit = async (e) => {
   // });
   return (
     <>
+    {loading ? (
+        <div className="loader-container">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+      
       <section className="MainContainer">
         <div className="register">
           <div className="col-2">
@@ -400,6 +411,7 @@ const handleSubmit = async (e) => {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 }
