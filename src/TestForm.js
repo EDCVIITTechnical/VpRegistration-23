@@ -20,6 +20,8 @@ export default function Form() {
 //   const [paymentSucceded, setPaymentSucceded] = useState(false);
   const [registered, setRegistered] = useState(false);
 
+  const navigate = useNavigate();
+
   //   payment Methods
 //   function loadScript(src) {
 //     return new Promise((resolve) => {
@@ -91,9 +93,6 @@ export default function Form() {
   //   paymentObject.open();
   // }
 
-  const registrationSuccess = async () => {
-    setRegistered(true);
-  };
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -103,6 +102,12 @@ export default function Form() {
   const [code, setCode] = useState("");
   const baseURL =
     "https://registration-back-k5iw.onrender.com/api/v1/registerEvent";
+
+    //------------------------------------------------------------
+    /*
+  const registrationSuccess = async () => {
+    
+
 
   const participant = {
     firstName: firstName,
@@ -116,15 +121,43 @@ export default function Form() {
   const submitNew = async () => {
     await axios
       .post(baseURL, participant)
-      .then(navigate("/success", { replace: true }));
+      .then(setRegistered(true));
   };
-
+};
+// navigate("/success", { replace: true })
   // if (paymentSucceded) {
   //   submitNew();
   // }
   if (registered) {
-    submitNew();
+    // submitNew();
+    navigate("/success", { replace: true })
   }
+  */
+//------------------------------------------------------------------
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch(baseURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({firstName, lastName, phoneNumber,
+        email, code, college, city}),
+    });
+    if (response.status === 200) {
+      navigate('/success');
+    } else {
+      console.error(await response.text());
+    }
+    // console.log(await response.text());
+    console.log("success");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 
   const resetAll = () => {
     setFirstName("");
@@ -172,7 +205,7 @@ export default function Form() {
             <h2>Registration Form</h2>
             {/* <span>Experience an eSummit like Never before</span> */}
 
-            <form id="form" className="flex flex-col">
+            <form id="form" className="flex flex-col" onSubmit={handleSubmit}>
               <div className="row-1">
                 <TextField
                   required
@@ -345,7 +378,7 @@ export default function Form() {
                       {/* <div>< input type="reset" value="Reset All"/></div> */}
                     </div>
                     <div className="submit">
-                      <Button onClick={registrationSuccess}>
+                      <Button type = "submit">
                         Regsiter Now!
                       </Button>
                     </div>
