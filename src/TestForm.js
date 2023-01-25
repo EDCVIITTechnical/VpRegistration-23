@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import "./TestForm.css";
 // backend req handler
-import axios from "axios";
+// import axios from "axios";
 // router
 import { useNavigate } from "react-router-dom";
 // import font
@@ -18,12 +18,12 @@ export default function Form() {
   //   "Vp-Coming-Soon/src/assets/vp-logo.png";
 
 //   const [paymentSucceded, setPaymentSucceded] = useState(false);
-  const [registered, setRegistered] = useState(false);
+  // const [registered, setRegistered] = useState(false);
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState(null);
 
   //   payment Methods
 //   function loadScript(src) {
@@ -153,14 +153,15 @@ const handleSubmit = async (e) => {
     if (response.status === 200) {
       navigate('/success');
     } else {
-      console.error(await response.text());
+      setError(await response.text());
     }
     setLoading(false);
     // console.log(await response.text());
-    console.log("success");
   } catch (error) {
+    setError(error.message);
     console.error(error);
   }
+  setLoading(false);
 };
 
 
@@ -412,6 +413,10 @@ const handleSubmit = async (e) => {
         </div>
       </section>
       )}
+  {error && (
+   navigate('/error')
+  )}
+
     </>
   );
 }
