@@ -105,13 +105,12 @@ export default function Form() {
   const [code, setCode] = useState("");
   const baseURL =
     "https://registration-back-k5iw.onrender.com/api/v1/registerEvent";
+    const [errors, setErrors] = useState({});
 
     //------------------------------------------------------------
     /*
   const registrationSuccess = async () => {
     
-
-
   const participant = {
     firstName: firstName,
     lastName: lastName,
@@ -137,23 +136,50 @@ export default function Form() {
   }
   */
 //------------------------------------------------------------------
-
+//-----------------------------------------------------------------
 const handleSubmit = async (e) => {
   e.preventDefault();
+
+   // Validate form fields
+   let formErrors = {};
+   if (!firstName) {
+     formErrors.name = '*Name is required';
+   }
+   if (!email) {
+     formErrors.email = '*Email is required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+      formErrors.email = '*Invalid email address';
+    }
+   
+   if (!phoneNumber) {
+     formErrors.phoneNumber = '*Phone number is required';
+   }else if (!/^\d{10}$/.test(phoneNumber)) {
+    formErrors.phoneNumber = '*Phone number must be 10 digits';
+  }
+
+    // If there are errors, update the state and return
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
   setLoading(true);
   try {
+    const formData = { firstName: firstName.toLowerCase(), lastName: lastName.toLowerCase(), phoneNumber,
+      email, code, college, city }
+      console.log(formData);
     const response = await fetch(baseURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({firstName, lastName, phoneNumber,
-        email, code, college, city}),
+      body: JSON.stringify(formData),
     });
     if (response.status === 200) {
       navigate('/success');
     } else {
       setError(await response.text());
+      console.log(response)
     }
     setLoading(false);
     // console.log(await response.text());
@@ -230,9 +256,7 @@ const handleSubmit = async (e) => {
                   label="First Name"
                   name="firstName"
                   value={firstName}
-                  onChange={(e) => {
-                    setFirstName(e.target.value);
-                  }}
+                  onChange={(e) => setFirstName(e.target.value)}
                   // margin="dense"
                   variant="filled"
                   multiline
@@ -242,6 +266,7 @@ const handleSubmit = async (e) => {
                   }}
                   color="warning"
                 />
+                {errors.firstName && <span>{errors.firstName}</span>}
                 <span></span>
                 <br></br>
                 <TextField
@@ -287,11 +312,14 @@ const handleSubmit = async (e) => {
                   inputProps={{ style: { color: "#ffab0f" } }}
                   color="warning"
                 />
+                  
+
               </div>
+              {errors.phoneNumber && <span className="m-span" style={{width:'15rem', fontFamily:'Poppins',fontSize:'0.8rem',color:'#ff0033'}}>{errors.phoneNumber} </span>}
               <div className="row-2">
                 <TextField
                   required
-                  sx={{ border: "outset #ffab0f 1px" }}
+                  sx={{ border: "outset #ffab0f 1px" , width:"100%"}}
                   InputLabelProps={{
                     style: { color: "white" },
                   }}
@@ -301,38 +329,16 @@ const handleSubmit = async (e) => {
                   label="Email"
                   name="email"
                   value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  onChange={(e) => setEmail(e.target.value)}
                   variant="filled"
                   multiline
                   inputProps={{ style: { color: "#ffab0f" } }}
                   color="warning"
-                />
-
-                <span></span>
-                <br></br>
-
-                <TextField
-                  sx={{ border: "outset #ffab0f 1px" }}
-                  InputLabelProps={{
-                    style: { color: "white" },
-                  }}
-                  autoCapitalize="ON"
-                  autoComplete="OFF"
-                  id="outlined-basic"
-                  label="Referral Code"
-                  name="code"
-                  value={code}
-                  onChange={(e) => {
-                    setCode(e.target.value);
-                  }}
-                  variant="filled"
-                  multiline
-                  inputProps={{ style: { color: "#ffab0f" } }}
-                  color="warning"
-                />
+                  />
+                
               </div>
+              {errors.email && <span style={{width:'11rem', fontFamily:'Poppins',fontSize:'0.8rem',color:'#ff0033'}}>{errors.email} </span>}
+
               <div className="row-3">
                 <TextField
                   required
@@ -377,6 +383,29 @@ const handleSubmit = async (e) => {
                   inputProps={{ style: { color: "#ffab0f" } }}
                   color="warning"
                 />
+                <span></span>
+                <br></br>
+                <TextField
+                  sx={{ border: "outset #ffab0f 1px" }}
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  autoCapitalize="ON"
+                  autoComplete="OFF"
+                  id="outlined-basic"
+                  label="Referral Code"
+                  name="code"
+                  value={code}
+                  onChange={(e) => {
+                    setCode(e.target.value);
+                  }}
+                  variant="filled"
+                  multiline
+                  inputProps={{ style: { color: "#ffab0f" } }}
+                  color="warning"
+                />
+                <span></span>
+                
               </div>
               {firstName &&
                 lastName &&
